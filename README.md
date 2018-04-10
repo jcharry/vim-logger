@@ -6,8 +6,8 @@ vim-logger provides easy print statements for some common languages. I get tired
 ## Usage
 Out of the box this plugin provides 3 mappings:
 
-1. `co` - in normal mode to add a log statement for the last thing you yanked
-2. `ci` - starts a print statement for you (and leaves you in insert mode where it counts) 
+1. `cly` - in normal mode to add a log statement for the last thing you yanked
+2. `cll` - starts a print statement for you (and leaves you in insert mode where it counts) 
 3. `cl` followed by a text object, like: 
   * `cliw` will log out the word under the cursor
   * `cliW` will log out the Word under the cursor

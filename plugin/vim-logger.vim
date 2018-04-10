@@ -103,12 +103,12 @@ nnoremap <silent> <Plug>LogFromInsertMode :<C-U>call <SID>insert_into_log()<CR>
 nnoremap <silent> <Plug>LogFromTextObject :<C-U>set opfunc=<SID>opfunc<CR>g@
 vnoremap <silent> <Plug>LogFromTextObject :<C-U>call <SID>opfunc(visualmode(), 1)<CR>
 
-if !hasmapto('<Plug>LogFromLastYank', 'n') || maparg('co', 'n') ==# ''
-  nmap co <Plug>LogFromLastYank
+if !hasmapto('<Plug>LogFromLastYank', 'n') || maparg('clp', 'n') ==# ''
+  nmap cly <Plug>LogFromLastYank
 endif
 
-if !hasmapto('<Plug>LogFromInsertMode', 'n') || maparg('ci', 'n') ==# ''
-  nmap ci <Plug>LogFromInsertMode
+if !hasmapto('<Plug>LogFromInsertMode', 'n') || maparg('cll', 'n') ==# ''
+  nmap cll <Plug>LogFromInsertMode
 endif
 
 if !hasmapto('<Plug>LogFromTextObject', 'n') || maparg('cl', 'n') ==# ''

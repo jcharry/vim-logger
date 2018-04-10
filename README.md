@@ -1,6 +1,8 @@
 # vim-logger
 vim-logger provides easy print statements for some common languages. I get tired of having to type out `console.log('my var', myVar);` so this plugin makes it possible to insert log statements with a few keystrokes
 
+![Example](https://raw.githubusercontent.com/jcharry/vim-logger/master/example.gif)
+
 ## Usage
 Out of the box this plugin provides 3 mappings:
 

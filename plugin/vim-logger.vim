@@ -2,6 +2,7 @@
 let s:print_statements = {
   \'js': "console.log($$);",
   \'ts': 'console.log($$);',
+  \'tsx': 'console.log($$);',
   \'coffee': 'console.log $$',
   \'java': 'System.out.println($$);',
   \'py': 'print($$)',

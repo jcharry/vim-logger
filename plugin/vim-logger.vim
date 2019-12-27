@@ -4,10 +4,11 @@ let s:print_statements = {
   \'ts': 'console.log($$);',
   \'tsx': 'console.log($$);',
   \'coffee': 'console.log $$',
-  \'java': 'System.out.println($$);',
   \'py': 'print($$)',
+  \'java': 'System.out.println($$);',
   \'sh': 'echo $$',
   \'c': 'printf($$\n);',
+  \'go': 'fmt.Println($$)',
   \'cpp': 'std::cout << $$\n;',
   \'lua': 'print($$)',
   \'pl': 'print $$;',
@@ -15,20 +16,29 @@ let s:print_statements = {
   \'swift': 'println($$)',
 \} 
 
-function! s:get_template_string()
+function! s:get_template_string(usePredefinedTemplate)
   let ext = expand('%:e')
-  let template = s:print_statements[ext]
-  if exists('g:vim_logger_templates')
-    if has_key(g:vim_logger_templates, ext)
-      let template = g:vim_logger_templates[ext]
+  let l:template = "No Formatter Defined for this Filetype"
+  
+  if has_key(s:print_statements, ext)
+    if a:usePredefinedTemplate
+      return s:print_statements[ext]
+    else
+      let l:template = s:print_statements[ext]
     endif
   endif
 
-  return template
+  if exists('g:vim_logger_templates')
+    if has_key(g:vim_logger_templates, ext)
+      let l:template = g:vim_logger_templates[ext]
+    endif
+  endif
+
+  return l:template
 endfunction
 
 function! s:wrap(text)
-  let template = s:get_template_string()
+  let template = s:get_template_string(0)
   let result = substitute(template, '\$\$', a:text, 'g')
   return result
 endfunction
@@ -57,7 +67,7 @@ function! s:insert_into_log()
   " Start a newline
   normal! o
 
-  let template = s:print_statements[ext]
+  let template = s:get_template_string(1)
   let @0 = template
   normal! "0p==0f$
 
@@ -118,4 +128,3 @@ endif
 if !hasmapto('<Plug>LogFromTextObject', 'v') || maparg('cl', 'v') ==# ''
   vmap cl <Plug>LogFromTextObject
 endif
-
